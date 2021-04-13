@@ -1,7 +1,7 @@
 const express = require("express");
-// const dotenv = require("dotenv");
+const dotenv = require("dotenv");
 const ConnectMongo = require("./config/db");
-// dotenv.config({path : './config.env'});
+dotenv.config({path: './config.env'})
 
 const app = express();
 // app.use(express.json());
