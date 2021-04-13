@@ -13,8 +13,8 @@ const ConnectMongo = async () => {
     });
     console.log("We have connected to MongoDB");
   } catch (error) {
-    console.error(error.message);
-    process.exit(1);
+    console.error(error.message); //when the catch run then show reasn of via .message error in console
+    process.exit(1); //This mean is that  stop re-runing again and again
   }
 };
 
