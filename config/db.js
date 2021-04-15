@@ -3,12 +3,13 @@ const mongoose = require("mongoose");
 // const db = config.get("mongoDB");
 
 //we are using single file env also for mongoDbURL via dotenv dependancy 
-const dotEnv=require('dotenv')
-const db= dotEnv.config({path: './config.env'})
+const dotEnv=require('dotenv');
+dotEnv.config({path: './config.env'})
+const db = process.env.mongoDB;
 
 const ConnectMongo = async () => {
   try {
-    mongoose.connect(db, {
+    await mongoose.connect(db, {
       useCreateIndex: true,
       useNewUrlParser: true,
       useFindAndModify: false,
