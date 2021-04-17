@@ -4,9 +4,11 @@ const ConnectMongo = require("./config/db");
 dotenv.config({path: './config.env'})
 
 const app = express();
-// app.use(express.json());
 
 ConnectMongo();
+
+//initialize middle wire
+app.use(express.json({extended: false}))
 
 app.get("/", (req, res) => res.json({ msg: "Helo World" }));
 
