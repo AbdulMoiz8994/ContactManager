@@ -5,7 +5,7 @@ const mongoose = require("mongoose");
 //we are using single file env also for mongoDbURL via dotenv dependancy 
 const dotEnv=require('dotenv');
 dotEnv.config({path: './config.env'})
-const db = process.env.mongoDB;
+const db = process.env.mongoDB
 
 const ConnectMongo = async () => {
   try {
