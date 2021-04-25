@@ -13,9 +13,9 @@ const auth=require('../middleware/auth')
 //import user modle
 
 // @route get api/auth 
-// access private 
-// This  route works like when users loggedIn then get/show their information not others  
-// we will sen dthe token and on header
+// access private. 
+// This  route works like when users loggedIn then come inside in page of user
+// we will send the token and on header.
 router.get("/", auth , async(req, res) => {
   try{
      const user=await User.findById(req.user.id).select('-password');

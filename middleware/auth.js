@@ -17,7 +17,7 @@ module.exports =function (req,res,next) {
     //   The purpose of next is that when user loggedIn then it execute next function 
       next();
     }catch(err){
-     console.error(err.message);
+     console.error(err.message); 
      res.status(401).json({msg: "invalid token"})
     }
 }
