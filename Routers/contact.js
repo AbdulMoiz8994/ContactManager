@@ -8,7 +8,7 @@ const auth=require('../middleware/auth')
 
 // @route Get api/contact
 //  get all the user's contacts
-// access private owner f user can see/acess
+// access private owner of user can see/acess
 router.get("/",auth, async(req, res) => {
   try{
         const contact=await Contact.find({user: req.user.id}).sort({
@@ -41,7 +41,6 @@ router.post("/",[auth,[
       phone,
       relationship,
       user: req.user.id
-
     })
 
     const contact= await newContact.save();
