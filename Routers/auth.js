@@ -6,16 +6,29 @@ const jwt=require('jsonwebtoken');
 const dotenv=require('dotenv')
 dotenv.config({path: '../config.env'})
 
+
 const User=require('../Model/User')
+const auth=require('../middleware/auth')
 
 //import user modle
 
-router.get("/", (req, res) => {
-  res.send("Get Logged in user");
+// @route get api/auth 
+// access private 
+// This  route works like when users loggedIn then get/show their information not others  
+// we will sen dthe token and on header
+router.get("/", auth , async(req, res) => {
+  try{
+     const user=await User.findById(req.user.id).select('-password');
+     res.json(user)
+  }catch(err){
+     console.error(err);
+     res.status(500).send("server error")
+  }
+
 });
 
 // @route Post api/auth
-// Autherize token and get user
+// Autherize user and get the token
 
 router.post("/",[
   check("email","please enter valid email").isEmail(),

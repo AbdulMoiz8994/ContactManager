@@ -12,6 +12,9 @@ dotEnv.config({ path: "../config.env" });
 
 const User = require("../Model/User");
 
+// @route Post api/user
+// Register a user
+// This is piblic avalible
 router.post(
   "/",
   [
