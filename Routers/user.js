@@ -12,6 +12,9 @@ dotEnv.config({ path: "../config.env" });
 
 const User = require("../Model/User");
 
+
+
+
 // @route Post api/user
 // Register a user
 // This is piblic avalible
@@ -74,6 +77,8 @@ router.post(
     }
   }
 );
+
+
 
 //we are exporting it as we do in react but syntax diff;
 module.exports = router;

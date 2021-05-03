@@ -33,13 +33,13 @@ router.post("/",[auth,[
    if(!errors.isEmpty()){
      return res.status(400).json({errors: errors.array()})
    }
-   const {name,email,phone,relationship}=req.body
+   const {name,email,phone,type}=req.body
   try{
     const  newContact= new Contact({
       name,
       email,
       phone,
-      relationship,
+      type,
       user: req.user.id
     })
 
@@ -51,13 +51,70 @@ router.post("/",[auth,[
   }
 });
 
-// @route PUT  api/contact/0
+// @route PUT  api/contact/:id
+// update the conact
+// access private
+// upto four fileds e can update this name,email,phone,type
+router.put("/:id",auth, async (req, res) => {
 
-router.put("/:id", (req, res) => {
-  res.status(500).send(req.body);
+    const {name,email,phone,type}=req.body
+
+ let contactFields={};
+//  Above is obejct and we are giving cond in key =value
+ if(name) contactFields.name= name;
+ if(email) contactFields.email=email;
+ if(phone) contactFields.phone=phone;
+ if(type) contactFields.type= type;
+ try{
+     let contact= await Contact.findById(req.params.id)
+    //  check if contact does not exist then run 404 server error and msg
+     if(!contact){
+       return res.status(404).json({msg: "This Contact does not exist"})
+     } 
+    //  if the contact exits,then make sure the current signed in user owns the account 
+     if(contact.user.toString() !== req.user.id){
+       return res.status(401).json({msg: "You do not have correct authorization to update this"})
+     }
+    //  if above conditions are all true
+     contact = await Contact.findByIdAndUpdate(req.params.id,
+      { $set: contactFields},
+      // if contact does not exist then create one 
+        {new: true}
+      )
+      console.log(contact);
+
+      res.json(contact)
+
+ }catch(err){
+     console.error(err.message);
+     return res.status(500).send("Server Error")
+ }     
 });
-router.delete("/:id", (req, res) => {
-  res.send("Delete The contact");
+
+// same as above things are required we req id of main contatc's user
+// @route delete api/contact/:id
+router.delete("/:id", auth ,async(req, res) => {
+  try{
+    let contact= await Contact.findById(req.params.id)
+   //  check if contact does not exist then run 404 server error and msg
+    if(!contact){
+      return res.status(404).json({msg: "This Contact does not exist"})
+    } 
+   //  if the contact exits,then make sure the current signed in user owns the account 
+    if(contact.user.toString() !== req.user.id){
+      return res.status(401).json({msg: "You do not have correct authorization to update this"})
+    }
+   //  if above conditions are all true
+      await Contact.findByIdAndRemove(req.params.id)
+
+      // we are sending the message that user's contact has been deleted
+      res.json({msg: "The contact has been deleted"})
+     
+
+}catch(err){
+    console.error(err.message);
+    return res.status(500).send("Server Error")
+}
 });
 
 //we are exporting it as we do in react but syntax diff;
