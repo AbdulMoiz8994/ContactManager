@@ -4,7 +4,10 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "server": "nodemon server.js"
+    "server": "nodemon server.js",
+    "client": "PORT=3006 npm start --prefix client",
+    "clientinstall":"npm insatll --prefix client" ,
+    "dev" : "concurrently  \"npm run server\" \"npm run client\""
   },
   "license": "MIT",
   "description": "Contact-managment-app",
