@@ -1,9 +1,16 @@
 import React from 'react'
+import {Contacts} from   '../Contacts/Contacts'
 
 export const Home = () => {
+
     return (
-        <div>
-            <h1>Home Page</h1>
+        <div className="grid-2">
+            <div>
+                Contact Form Will display here
+            </div>
+            <div>
+            <Contacts/>
+            </div>
         </div>
     )
 }

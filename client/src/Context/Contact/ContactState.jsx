@@ -37,7 +37,7 @@ export const ContactState=(props) =>{
             type: "personal"
         },
         {
-            id: 1,
+            id: 3,
             name: "Adil Altaf",
             email: "adila8@gmail.com",
             phone: '333-333-333',
@@ -70,6 +70,17 @@ export const ContactState=(props) =>{
 
 // remove alert
 
+
+   return(
+       <div>
+           <CreateContext.Provider 
+           value={{
+               contacts: state.contacts
+           }}> 
+              {props.children}
+           </CreateContext.Provider>
+       </div>
+   )
 
 }
 
