@@ -1,11 +1,11 @@
 import React from 'react'
-
+import PropTypes from 'prop-types';
 export const ContactItem = ({contacts}) => {
     console.log(contacts);
     // we do destructure all our keys of objects form contacts's object
     const {id,name,email,phone,type} =contacts
     return (
-        <div className="card bg-light">
+        <div className="card bg-light" key={id}>
             <h3 className="text-primary text-left">
                 {name} {' '} 
                 <span style={{float: 'right', borderRadius:' 3px', padding: '10px'}} className={(type === 'professional' ? 'badge-success' : 'badge-primary') }>
@@ -28,6 +28,11 @@ export const ContactItem = ({contacts}) => {
                     </li>
                 )}
             </ul>
+
+            <p>
+                <button className="btn btn-dark btn-sm">Edit</button>
+                <button className="btn btn-danger btn-sm">Delete</button>
+            </p>
         </div>
     )
 }

@@ -2,7 +2,7 @@ import React, { useReducer } from 'react'
 import {CreateContext} from './CreateContact'
 import {ContactReducer} from './ContactReducer'
 // Random data generate kar sakthee ha temp for now
-import {uuid}from 'uuid'
+import {v4 as uuid} from 'uuid';
 
 import {
     ADD_CONTACT,
@@ -53,6 +53,13 @@ export const ContactState=(props) =>{
 // Now we wil create actions of all our types, because we define types for actions
 
 // add Contact
+const addContact=(contact) =>{
+    contact.id= uuid
+    dispatch({
+        type: ADD_CONTACT,
+        payload: contact
+    })
+}
 
 // delete Contact
 
@@ -75,7 +82,8 @@ export const ContactState=(props) =>{
        <div>
            <CreateContext.Provider 
            value={{
-               contacts: state.contacts
+               contacts: state.contacts,
+               addContact
            }}> 
               {props.children}
            </CreateContext.Provider>
