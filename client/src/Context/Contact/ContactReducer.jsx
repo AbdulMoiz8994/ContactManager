@@ -1,4 +1,4 @@
-import {ADD_CONTACT} from '../Types'
+import {ADD_CONTACT,DELETE_CONTACT} from '../Types'
 
 
 export const ContactReducer=(state,action) =>{
@@ -11,7 +11,12 @@ export const ContactReducer=(state,action) =>{
                   contacts: [action.payload, ...state.contacts],
                  
 
-            }
+            };
+          case  DELETE_CONTACT:
+          return{
+             ...state,
+             contacts: state.contacts.filter((contact)=> contact.id !== action.payload )
+          } 
             // by defualt jo vlaues ha wo a jayee gi gar kkuch or type karta ha
             default:
                return state
