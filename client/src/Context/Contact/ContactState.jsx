@@ -43,8 +43,8 @@ export const ContactState=(props) =>{
             phone: '333-333-333',
             type: "professional"
         }
-     ]
-
+     ],
+     current: null
  }
  // create Reducer
 
@@ -71,8 +71,22 @@ const deleteContact=(id) =>{
 
 
 // set current
+const SetCurrent=(contact) =>{
+    console.log(contact);
+    dispatch({
+        type: SET_CURRENT,
+        payload:  contact
+    })
+}
+
 
 // clear contact
+const clearContact=() =>{
+    dispatch({
+        type: CLEAR_CONTACT,
+    })
+}
+
 
 // update contact
 
@@ -90,8 +104,11 @@ const deleteContact=(id) =>{
            <CreateContext.Provider 
            value={{
                contacts: state.contacts,
+               current: state.current,
                addContact,
                deleteContact,
+               SetCurrent,
+               clearContact,
            }}> 
               {props.children}
            </CreateContext.Provider>

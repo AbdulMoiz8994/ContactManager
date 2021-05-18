@@ -3,14 +3,15 @@ import PropTypes from 'prop-types';
 import {CreateContext} from '../../Context/Contact/CreateContact'
 export const ContactItem = ({contacts}) => {
     console.log(contacts);
-    const {deleteContact}=useContext(CreateContext)
+    const {deleteContact,SetCurrent,clearContact}=useContext(CreateContext)
       console.log(deleteContact);
     // we do destructure all our keys of objects form contacts's object
     const {id,name,email,phone,type} =contacts
 console.log(id);
 // delete User
 const deleteUser=() =>{
-    deleteContact(id)           
+    deleteContact(id)
+    clearContact()           
 }
 
 
@@ -41,7 +42,7 @@ const deleteUser=() =>{
             </ul>
 
             <p>
-                <button className="btn btn-dark btn-sm" >Edit</button>
+                <button className="btn btn-dark btn-sm" onClick={() => SetCurrent(contacts)}>Edit</button>
                 <button className="btn btn-danger btn-sm" onClick={deleteUser}>Delete</button>
             </p>
         </div>

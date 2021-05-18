@@ -1,8 +1,26 @@
-import React, { useContext, useState } from 'react'
+import React, { createContext, useContext, useEffect, useState } from 'react'
 import {CreateContext} from  '../../Context/Contact/CreateContact'
 export const ContactForm = () => {
     
     const CreateContexts=useContext(CreateContext)
+    // destrcuture from global state
+    const {addContact,current,clearContact}=CreateContexts
+
+    console.log(current);
+    useEffect(() =>{
+        if(current !== null){
+            setContact(current)
+        }else{
+            setContact({
+                name: '',
+                email: '',
+                phone: '',
+                type: 'personal',         
+            })
+        }
+    },[current,CreateContexts])
+
+
     const [contact, setContact]=useState({
         name: '',
         email: '',
@@ -20,7 +38,7 @@ const onChange=(event) =>{
 }
 const onSubmit=(event) =>{
    event.preventDefault();
-   CreateContexts.addContact(contact);
+   addContact(contact);
 //    when we will submit the form the useState hook's function call setContact will come again on initial form 
    setContact({
        name: '',
@@ -30,10 +48,16 @@ const onSubmit=(event) =>{
    })
 }
 
+// clear all input's if we want do not want to edit something
+const clearAll=() =>{
+    clearContact();
+}
+
     return (
         <>
           <form onSubmit={onSubmit}>
-         <h2 className="text-primary">Add Contact</h2>      
+        {/* if current exist then edit Contact otherwise add Contact */}
+         <h2 className="text-primary">{current ? "Edit Contact" : "Add Contact"}</h2>      
          <input type="text"
           placeholder="Name"
           name="name"
@@ -57,7 +81,14 @@ const onSubmit=(event) =>{
          {/* we give the space like this sometimes */}
           { ' '}    
          <input type='radio' name='type' value='professional' checked={type === 'professional'} onChange={onChange}/> Professional
-         <input type="submit" value="Add Contact" className="btn btn-primary btn-block" />
+         {/* if current exist then edit otherwise add contact */}
+         <input type="submit" value={current ? "Update Contact" : "Add Contact"} className="btn btn-primary btn-block"  />
+
+         {current && (
+             <div>
+                 <button className="btn btn-light-btn-block" onClick={clearAll}>Clear</button>
+             </div>
+         )}
         </form>  
         </>
     )
