@@ -4,7 +4,7 @@ export const ContactForm = () => {
     
     const CreateContexts=useContext(CreateContext)
     // destrcuture from global state
-    const {addContact,current,clearContact}=CreateContexts
+    const {addContact,current,clearContact,updateContact}=CreateContexts
 
     console.log(current);
     useEffect(() =>{
@@ -38,7 +38,13 @@ const onChange=(event) =>{
 }
 const onSubmit=(event) =>{
    event.preventDefault();
-   addContact(contact);
+
+   if(current === null){
+    addContact(contact);
+   }else{
+    updateContact(contact)
+   }
+   
 //    when we will submit the form the useState hook's function call setContact will come again on initial form 
    setContact({
        name: '',
@@ -46,6 +52,7 @@ const onSubmit=(event) =>{
        phone: '',
        type: 'personal'
    })
+//    we can also call function clearAll() which will do same thing same as above
 }
 
 // clear all input's if we want do not want to edit something
@@ -86,7 +93,7 @@ const clearAll=() =>{
 
          {current && (
              <div>
-                 <button className="btn btn-light-btn-block" onClick={clearAll}>Clear</button>
+                 <button className="btn btn-light btn-block" onClick={clearAll}>Clear</button>
              </div>
          )}
         </form>  

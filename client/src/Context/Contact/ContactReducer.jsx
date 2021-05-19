@@ -1,4 +1,4 @@
-import {ADD_CONTACT,DELETE_CONTACT,SET_CURRENT,CLEAR_CONTACT} from '../Types'
+import {ADD_CONTACT,DELETE_CONTACT,SET_CURRENT,CLEAR_CONTACT,UPDATE_CONTACT} from '../Types'
 
 
 export const ContactReducer=(state,action) =>{
@@ -9,14 +9,17 @@ export const ContactReducer=(state,action) =>{
                 // in this spread state we have firt first state.contacts in array of obejcts
                 ...state,
                   contacts: [action.payload, ...state.contacts],
-                 
-
             };
           case  DELETE_CONTACT:
           return{
              ...state,
-             contacts: state.contacts.filter((contact)=> contact.id !== action.payload )
+             contacts: state.contacts.filter((contact) => contact.id !== action.payload )
           };
+          case UPDATE_CONTACT:
+              return{
+                  ...state,
+                  contacts: state.contacts.map((contact) => contact.id === action.payload.id ? action.payload : contact)
+              };
          case SET_CURRENT:
          return{
              ...state,
