@@ -46,12 +46,13 @@ const onSubmit=(event) =>{
    }
    
 //    when we will submit the form the useState hook's function call setContact will come again on initial form 
-   setContact({
-       name: '',
-       email: '',
-       phone: '',
-       type: 'personal'
-   })
+//    setContact({
+//        name: '',
+//        email: '',
+//        phone: '',
+//        type: 'personal'
+//    })
+ clearAll()
 //    we can also call function clearAll() which will do same thing same as above
 }
 
