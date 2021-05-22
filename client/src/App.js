@@ -7,6 +7,8 @@ import { ContactState } from "./Context/Contact/ContactState";
 import {AuthState} from './Context/Auth/AuthState'
 import { Home, About } from "./Components/Pages/index";
 import {Register} from './Components/Auth/Register'
+import {UserLogin} from './Components/Auth/UserLogin'
+
 function App() {
   return (
     <AuthState>
@@ -20,6 +22,7 @@ function App() {
               <Route exact path='/' component={Home} />
               <Route exact path='/about' component={About} />
               <Route exact path="/register" component={Register}/>
+              <Route exact path="/userlogin" component={UserLogin}/>
             </Switch>
           </div>
           

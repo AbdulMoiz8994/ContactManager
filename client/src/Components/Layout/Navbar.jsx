@@ -14,6 +14,12 @@ export const Navbar = ({title,icon}) => {
                 <li>
                     <Link to='/about'>About</Link>
                 </li>
+                <li>
+                    <Link to="/register">Register</Link>
+                </li>
+                <li>
+                    <Link to="/userlogin">Login</Link>
+                </li>
             </ul>
         </div>
     )
