@@ -14,7 +14,7 @@ export const AlertState = (props) => {
 // setAlert
 // we get two value in the paremeter first is alert msg and second is style type
 const setAlert=(msg,type) =>{
-    const id= 
+    const id= uuid()
      dispatch({type: SET_ALERT, payload:{ msg,type,id}})
 
 // Removealert
