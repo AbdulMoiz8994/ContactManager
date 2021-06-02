@@ -17,18 +17,26 @@ import {
                  localStorage.setItem('token',action.payload.token)
                  return{
                     ...state,
-                    isAuthenticated: true,
                     ...action.payload,
+                    isAuthenticated: true,
                     loading: false
              }
              case REGISTER_FAIL:
-                 localStorage.setItem('token')
+                 localStorage.removeItem('token')
                  return{
                      ...state,
-                     isAuthenticated: null,
+                     token: null,
+                     isAuthenticated: false,
                      loading: false,
                      user: null,
-                    err: action.payload
+                    error: action.payload
                  }
+                 case CLEAR_ERROR:
+                     return{
+                         ...state,
+                         error: null
+                     }
+                 default:
+                     return state
      }
  }   

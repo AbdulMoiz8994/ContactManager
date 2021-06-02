@@ -37,7 +37,7 @@ export const AuthState = (props) => {
     //load user
 
     //Register user
-    async function register(formData) {
+   const register= async(formData) =>{
         const config = {
             headers: {
                 'Content-Type': 'application/json'
@@ -47,12 +47,12 @@ export const AuthState = (props) => {
             const res = await axios.post('/api/user', formData, config)
             dispatch({
                 type: REGISTER_SUCCESS,
-                paylload: res.data
+                payload: res.data
             })
         } catch (err) {
          dispatch({
              type: REGISTER_FAIL,
-             paylaod: err.response.data.msg
+             payload: err.response.data.msg
          })
         }
     }
@@ -63,6 +63,14 @@ export const AuthState = (props) => {
 
     //logout user
 
+
+    // clear Error
+    const ClearError=() =>{
+      dispatch({
+          type: CLEAR_ERROR,
+      })
+    }
+
     return (
         <div>
             <AuthContact.Provider value={{
@@ -70,8 +78,9 @@ export const AuthState = (props) => {
                 isAuthenticated: state.isAuthenticated,
                 loading: state.loading,
                 user: state.user,
-                error: state.user,
+                error: state.error,
                 register,
+                ClearError,
             }}>
                 {props.children}
             </AuthContact.Provider>
