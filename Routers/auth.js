@@ -13,6 +13,7 @@ const auth=require('../middleware/auth')
 //import user modle
 
 // @route get api/auth 
+// @desc get the logged in user
 // access private. 
 // This  route works like when users loggedIn then come inside in page of user
 // we will send the token and on header.
